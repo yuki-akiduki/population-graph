@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { css } from "@emotion/react";
+import { css } from '@emotion/react';
 import axios from 'axios';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
@@ -10,15 +10,14 @@ type Props = {
     prefCode: number;
     prefName: string;
   }[];
-}
+};
 
 type PopulationData = {
   year: number;
   value: string;
 };
 
-const Graph = ({code,prefecture}:Props) => {
-
+const Graph = ({ code, prefecture }: Props) => {
   // グラフデータ格納
   const [populationData, setPopulationData] = useState<{ [key: string]: PopulationData[] }>({});
 
@@ -26,7 +25,7 @@ const Graph = ({code,prefecture}:Props) => {
   useEffect(() => {
     const fetchData = async () => {
       const newData: { [key: string]: PopulationData[] } = {};
-      for(const codeItem of code) {
+      for (const codeItem of code) {
         const res = await axios.get(`/api/population?prefCode=${codeItem}`);
         newData[codeItem] = res.data.result.data[0].data;
       }
@@ -38,12 +37,12 @@ const Graph = ({code,prefecture}:Props) => {
   // グラフオプション
   const options: Highcharts.Options = {
     title: {
-      text: '人口推移の折れ線グラフ'
+      text: '人口推移の折れ線グラフ',
     },
     yAxis: {
       title: {
-        text: "人口構成比（%）"
-      }
+        text: '人口構成比（%）',
+      },
     },
     plotOptions: {
       series: {
@@ -54,12 +53,15 @@ const Graph = ({code,prefecture}:Props) => {
         pointStart: 1960,
       },
     },
-    series:code.length === 0 ? [{ type: "line", name: "都道府県名", data: [] }] : Object.keys(populationData).map(key => ({
-      name: prefecture[parseInt(key) - 1].prefName,
-      data: populationData[key].map(item => [item.year, item.value]),
-      type: 'line',
-    }))
-  }
+    series:
+      code.length === 0
+        ? [{ type: 'line', name: '都道府県名', data: [] }]
+        : Object.keys(populationData).map((key) => ({
+            name: prefecture[parseInt(key) - 1].prefName,
+            data: populationData[key].map((item) => [item.year, item.value]),
+            type: 'line',
+          })),
+  };
 
   return (
     <div css={sticky}>
@@ -74,6 +76,6 @@ const sticky = css`
     top: 0;
     left: 0;
   }
-`
+`;
 
 export default Graph;

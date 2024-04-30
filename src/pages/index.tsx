@@ -1,5 +1,5 @@
-import { css } from "@emotion/react";
-import Head from "next/head";
+import { css } from '@emotion/react';
+import Head from 'next/head';
 import HeadingLv1 from '@/components/ui/HeadingLv1';
 import Graph from '@/components/ui/Graph';
 import CheckPrefectures from '@/components/ui/CheckPrefectures';
@@ -14,19 +14,18 @@ type PrefecturesData = {
 
 export default function Home() {
   // 都道府県データ格納
-  const [prefecture, setPrefecture] = useState<PrefecturesData[]>([])
+  const [prefecture, setPrefecture] = useState<PrefecturesData[]>([]);
   // 表示させる都道府県
-  const [prefectureCode, setPrefectureCode] = useState<number[]>([])
+  const [prefectureCode, setPrefectureCode] = useState<number[]>([]);
 
   // 都道府県データ取得
   useEffect(() => {
     const fetchData = async () => {
       const res = await axios.get('/api/prefectures');
       setPrefecture(res.data.result);
-    }
-    fetchData()
-  },[]);
-
+    };
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -39,13 +38,12 @@ export default function Home() {
         <div css={contentsArea}>
           <section>
             <HeadingLv1 text="人口推移表" />
-            <Graph code = {prefectureCode} prefecture = {prefecture} />
-            <CheckPrefectures setPrefectureCode = {setPrefectureCode} prefecture = {prefecture} />
+            <Graph code={prefectureCode} prefecture={prefecture} />
+            <CheckPrefectures setPrefectureCode={setPrefectureCode} prefecture={prefecture} />
           </section>
         </div>
         <Copyright />
       </main>
-
     </>
   );
 }
@@ -53,9 +51,9 @@ export default function Home() {
 const globalArea = css`
   margin-left: 24px;
   margin-right: 24px;
-`
+`;
 
 const contentsArea = css`
   max-width: 1024px;
   margin-inline: auto;
-`
+`;

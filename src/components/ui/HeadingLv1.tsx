@@ -1,14 +1,12 @@
-import { css } from "@emotion/react";
+import { css } from '@emotion/react';
 
 type Props = {
   text: string;
-}
+};
 
-const HeadingLv1 = ({text}: Props) => {
-  return (
-    <h1 css={headingStyle}>{text}</h1>
-  )
-}
+const HeadingLv1 = ({ text }: Props) => {
+  return <h1 css={headingStyle}>{text}</h1>;
+};
 
 const headingStyle = css`
   text-align: center;
@@ -21,6 +19,6 @@ const headingStyle = css`
     margin-top: 32px;
     margin-bottom: 14px;
   }
-`
+`;
 
-export default HeadingLv1
+export default HeadingLv1;
