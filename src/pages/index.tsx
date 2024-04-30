@@ -1,20 +1,28 @@
 import Head from "next/head";
-import Headinglv1 from '@/components/ui/Headinglv1';
+import HeadingLv1 from '@/components/ui/HeadingLv1';
+import Graph from '@/components/ui/Graph';
+import CheckPrefectures from '@/components/ui/CheckPrefectures';
+
+import axios from 'axios';
+import { useState } from 'react';
+
+
 
 export default function Home() {
+
+  const [prefectureCode, setPrefectureCode] = useState<number[]>([])
+
   return (
     <>
       <Head>
         <title>テスト</title>
         <meta name="description" content="テスト・テストテスト" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/destyle.css@1.0.15/destyle.css"
-        />
       </Head>
       <section>
-        <Headinglv1 text="人口推移表" />
+        <HeadingLv1 text="人口推移表" />
+        <Graph code = {prefectureCode} />
+        <CheckPrefectures setPrefectureCode = {setPrefectureCode}  />
       </section>
     </>
   );

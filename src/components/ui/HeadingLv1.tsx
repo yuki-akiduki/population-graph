@@ -18,5 +18,4 @@ const headingStyle = css`
   margin-bottom: 28px;
 `
 
-
 export default HeadingLv1
