@@ -39,6 +39,7 @@ const grid = css`
   display: grid;
   gap: var(--gap);
   grid-template-columns: repeat(auto-fit,minmax(var(--size),1fr));
+  margin-top: 32px;
 `
 
 const gridItem = css`

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { css } from "@emotion/react";
 import axios from 'axios';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
@@ -36,6 +37,14 @@ const Graph = ({code,prefecture}:Props) => {
 
   // グラフオプション
   const options: Highcharts.Options = {
+    title: {
+      text: '人口推移の折れ線グラフ'
+    },
+    yAxis: {
+      title: {
+        text: "人口構成比（%）"
+      }
+    },
     plotOptions: {
       series: {
         label: {
@@ -53,10 +62,18 @@ const Graph = ({code,prefecture}:Props) => {
   }
 
   return (
-    <div>
+    <div css={sticky}>
       <HighchartsReact highcharts={Highcharts} options={options} />
     </div>
   );
 };
+
+const sticky = css`
+  @media screen and (max-width: 834px) {
+    position: sticky;
+    top: 0;
+    left: 0;
+  }
+`
 
 export default Graph;
