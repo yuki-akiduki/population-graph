@@ -3,6 +3,7 @@ import Head from "next/head";
 import HeadingLv1 from '@/components/ui/HeadingLv1';
 import Graph from '@/components/ui/Graph';
 import CheckPrefectures from '@/components/ui/CheckPrefectures';
+import Copyright from '@/components/ui/Copyright';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
@@ -42,6 +43,7 @@ export default function Home() {
             <CheckPrefectures setPrefectureCode = {setPrefectureCode} prefecture = {prefecture} />
           </section>
         </div>
+        <Copyright />
       </main>
 
     </>
