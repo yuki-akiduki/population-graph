@@ -4,13 +4,27 @@ import Graph from '@/components/ui/Graph';
 import CheckPrefectures from '@/components/ui/CheckPrefectures';
 
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-
+type PrefecturesData = {
+  prefCode: number;
+  prefName: string;
+};
 
 export default function Home() {
+  const [prefecture, setPrefecture] = useState<PrefecturesData[]>([])
 
   const [prefectureCode, setPrefectureCode] = useState<number[]>([])
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await axios.get('/api/prefectures');
+      setPrefecture(res.data.result);
+    }
+    fetchData()
+  },[]);
+
 
   return (
     <>
@@ -21,8 +35,8 @@ export default function Home() {
       </Head>
       <section>
         <HeadingLv1 text="人口推移表" />
-        <Graph code = {prefectureCode} />
-        <CheckPrefectures setPrefectureCode = {setPrefectureCode}  />
+        <Graph code = {prefectureCode} prefecture = {prefecture} />
+        <CheckPrefectures setPrefectureCode = {setPrefectureCode} prefecture = {prefecture} />
       </section>
     </>
   );
