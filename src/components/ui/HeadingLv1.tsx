@@ -16,6 +16,11 @@ const headingStyle = css`
   margin-top: 64px;
   font-weight: 700;
   margin-bottom: 28px;
+  @media screen and (max-width: 834px) {
+    font-size: 32px;
+    margin-top: 32px;
+    margin-bottom: 14px;
+  }
 `
 
 export default HeadingLv1
